@@ -49,6 +49,24 @@
 - **原生 review 展示**：AI review 要求模型返回 JSON，扩展解析后创建 VS Code comment thread，而不是输出一份孤立的报告。
 - **可诊断**：`off`、`error`、`info`、`debug` 日志等级，日志会写入 `AI Commit` 输出通道和扩展日志文件。
 
+## 安装
+
+当前版本先通过 GitHub Release 分发 VSIX：
+
+1. 打开 [AI Commit Native v0.1.5](https://github.com/zhiluop/ai-commit-native/releases/tag/v0.1.5)。
+2. 下载 `ai-commit-native-0.1.5.vsix`。
+3. 在 VS Code 扩展面板右上角点击 `...`。
+4. 选择 `Install from VSIX...`。
+5. 选择刚下载的 VSIX 文件完成安装。
+
+也可以用命令行安装：
+
+```bash
+code --install-extension ai-commit-native-0.1.5.vsix
+```
+
+安装后在 VS Code 设置页搜索 `AI Commit`，配置 endpoint、模型和 API Key 即可使用。正式发布到 VS Code Marketplace 后，可以直接在扩展商店搜索安装。
+
 ## 快速开始
 
 1. 在 VS Code 设置页搜索 `AI Commit`。
