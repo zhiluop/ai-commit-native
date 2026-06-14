@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="AI Commit Native icon">
+  <defs>
+    <radialGradient id="disc" cx="35%" cy="28%" r="76%">
+      <stop offset="0" stop-color="#182136"/>
+      <stop offset="0.58" stop-color="#0a0f1c"/>
+      <stop offset="1" stop-color="#05070d"/>
+    </radialGradient>
+    <linearGradient id="wire" x1="61" y1="177" x2="195" y2="78" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#28f0aa"/>
+      <stop offset="0.52" stop-color="#45baff"/>
+      <stop offset="1" stop-color="#37ff9d"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.10 0 0 0 0 0.70 0 0 0 0 1 0 0 0 0.55 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="128" cy="128" r="112" fill="url(#disc)"/>
+  <circle cx="128" cy="128" r="110" fill="none" stroke="#263145" stroke-width="2" opacity="0.9"/>
+
+  <path d="M67 166h31c24 0 30-18 30-39s7-37 31-37h30" fill="none" stroke="#24324a" stroke-width="28" stroke-linecap="round"/>
+  <path d="M67 166h31c24 0 30-18 30-39s7-37 31-37h30" fill="none" stroke="url(#wire)" stroke-width="13" stroke-linecap="round" filter="url(#softGlow)"/>
+
+  <circle cx="68" cy="166" r="19" fill="#07101b" stroke="#28f0aa" stroke-width="7"/>
+  <circle cx="128" cy="128" r="19" fill="#07101b" stroke="#45baff" stroke-width="7"/>
+  <circle cx="190" cy="90" r="19" fill="#07101b" stroke="#37ff9d" stroke-width="7"/>
+
+  <path d="M181 143l8 19 19 8-19 8-8 19-8-19-19-8 19-8 8-19z" fill="#e6fff5"/>
+  <path d="M78 58l5 12 12 5-12 5-5 12-5-12-12-5 12-5 5-12z" fill="#7bdfff"/>
+  <path d="M92 201h72" stroke="#334258" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+  <path d="M107 201h42" stroke="#e6fff5" stroke-width="5" stroke-linecap="round"/>
+</svg>

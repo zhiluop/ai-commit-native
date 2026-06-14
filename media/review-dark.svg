@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+  <title>AI Review</title>
+  <!-- Magnifier over a code document. Visually distinct from native $(comment-discussion) (rounded speech bubble with two text lines) because it is a circle with a diagonal handle sitting on top of a flat document corner. -->
+  <path d="M2.5 3.2c0-.7.6-1.2 1.2-1.2H7l1.6 1.7v6.6c0 .7-.5 1.2-1.2 1.2H3.7c-.7 0-1.2-.5-1.2-1.2V3.2z" stroke="#c4a8ff" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M7 2v1.5c0 .6.5 1.2 1.2 1.2H9.7" stroke="#c4a8ff" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M4.6 6.7h2.4M4.6 8.4h1.7" stroke="#c4a8ff" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="11.3" cy="11" r="2.6" stroke="#9ad7ff" stroke-width="1.4"/>
+  <path d="M13.2 12.9L14.5 14.2" stroke="#9ad7ff" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M11.3 9.9l.3.7.7.3-.7.3-.3.7-.3-.7-.7-.3.7-.3.3-.7z" fill="#9ad7ff"/>
+</svg>

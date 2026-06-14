@@ -1,0 +1,15 @@
+node_modules/
+*.vsix
+.DS_Store
+.agents/
+.codex/
+.omx/
+.vscode-test/
+.ai-commit.example.md
+out/
+dist/
+coverage/
+scripts/
+test/
+*.log
+*.map
