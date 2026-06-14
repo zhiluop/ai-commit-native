@@ -65,19 +65,18 @@
 | --- | --- | --- |
 | `aiCommit.apiFormat` | `openai-compatible` | 请求/响应格式：OpenAI-compatible 或 Anthropic-compatible |
 | `aiCommit.apiBaseUrl` | `https://api.openai.com/v1` | 官方 API、中转、网关或 relay 的 base URL |
-| `aiCommit.apiKey` | 空 | 可选明文 API Key；SecretStorage 中的 key 优先 |
 | `aiCommit.model` | `gpt-4o-mini` | commit/review 使用的模型 ID |
-| `aiCommit.commitLanguage` | `zh-CN` | commit message 和 review 评论输出语言 |
-| `aiCommit.customLanguage` | 空 | `commitLanguage` 为 `custom` 时使用的语言名或语言偏好 |
+| `aiCommit.apiKey` | 空 | 可选明文 API Key；SecretStorage 中的 key 优先 |
+| `aiCommit.temperature` | `0.2` | 模型采样温度 |
+| `aiCommit.maxTokens` | `4096` | 请求模型输出的最大 token 数 |
+| `aiCommit.commitLanguage` | `zh-CN` | commit message 和 review 评论输出语言；支持预设代码或自定义语言偏好 |
 | `aiCommit.promptSource` | `both` | 自定义提示词来源：none、inline、file、both |
 | `aiCommit.inlinePrompt` | 空 | settings 中的内联提示词 |
 | `aiCommit.promptFile` | `.ai-commit.md` | Markdown 提示词文件，支持绝对路径或相对工作区路径 |
 | `aiCommit.preferStagedChanges` | `true` | 优先使用暂存区 diff |
 | `aiCommit.maxDiffCharacters` | `60000` | 发送给模型的 diff 最大字符数 |
-| `aiCommit.temperature` | `0.2` | 模型采样温度 |
-| `aiCommit.maxTokens` | `4096` | 请求模型输出的最大 token 数 |
-| `aiCommit.logLevel` | `info` | 日志等级：off、error、info、debug |
 | `aiCommit.maxReviewDiffEditors` | `5` | review 后最多打开的 diff 编辑器数量 |
+| `aiCommit.logLevel` | `info` | 日志等级：off、error、info、debug |
 
 ## 配置示例
 
@@ -113,12 +112,11 @@ Anthropic-compatible 格式：
 }
 ```
 
-自定义语言示例配置：
+自定义语言偏好示例配置：
 
 ```json
 {
-  "aiCommit.commitLanguage": "custom",
-  "aiCommit.customLanguage": "中文，技术名词保留英文"
+  "aiCommit.commitLanguage": "中文，技术名词保留英文"
 }
 ```
 

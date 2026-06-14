@@ -2,7 +2,7 @@
   "name": "ai-commit-native",
   "displayName": "AI Commit Native",
   "description": "Generate AI commit messages and native diff review comments from VS Code Source Control.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "local-dev",
   "license": "MIT",
   "homepage": "https://github.com/zhiluop/ai-commit-native#readme",
@@ -130,6 +130,7 @@
         "title": "AI Commit: Connection",
         "properties": {
           "aiCommit.apiFormat": {
+            "order": 10,
             "type": "string",
             "default": "openai-compatible",
             "enum": [
@@ -143,19 +144,38 @@
             "markdownDescription": "API 请求/响应协议格式，不代表必须使用官方 OpenAI 或 Anthropic。中转、网关、relay 只要兼容对应格式即可。"
           },
           "aiCommit.apiBaseUrl": {
+            "order": 20,
             "type": "string",
             "default": "https://api.openai.com/v1",
             "markdownDescription": "官方 API、中转、网关或 relay 的 base URL。OpenAI-compatible 会请求 `<baseUrl>/chat/completions`；Anthropic-compatible 会请求 `<baseUrl>/v1/messages`。"
           },
+          "aiCommit.model": {
+            "order": 30,
+            "type": "string",
+            "default": "gpt-4o-mini",
+            "markdownDescription": "发送给当前 endpoint 的模型 ID。请填写你的官方 API、中转、网关或 relay 实际要求的模型名。"
+          },
           "aiCommit.apiKey": {
+            "order": 40,
             "type": "string",
             "default": "",
             "markdownDescription": "可选明文 API Key。更推荐运行 `AI Commit: Set API Key`，把 Key 存入 VS Code SecretStorage；SecretStorage 优先级更高。"
           },
-          "aiCommit.model": {
-            "type": "string",
-            "default": "gpt-4o-mini",
-            "markdownDescription": "发送给当前 endpoint 的模型 ID。请填写你的官方 API、中转、网关或 relay 实际要求的模型名。"
+          "aiCommit.temperature": {
+            "order": 50,
+            "type": "number",
+            "default": 0.2,
+            "minimum": 0,
+            "maximum": 2,
+            "description": "模型采样温度。commit message 通常建议保持较低。"
+          },
+          "aiCommit.maxTokens": {
+            "order": 60,
+            "type": "number",
+            "default": 4096,
+            "minimum": 256,
+            "maximum": 64000,
+            "description": "请求模型输出的最大 token 数。"
           }
         }
       },
@@ -163,40 +183,16 @@
         "title": "AI Commit: Output Language",
         "properties": {
           "aiCommit.commitLanguage": {
+            "order": 10,
             "type": "string",
             "default": "zh-CN",
-            "enum": [
+            "examples": [
               "zh-CN",
-              "zh-TW",
               "en",
-              "ru",
               "ja",
-              "ko",
-              "fr",
-              "de",
-              "es",
-              "pt",
-              "custom"
+              "中文，技术名词保留英文"
             ],
-            "enumItemLabels": [
-              "简体中文",
-              "繁體中文",
-              "English",
-              "Русский",
-              "日本語",
-              "한국어",
-              "Français",
-              "Deutsch",
-              "Español",
-              "Português",
-              "Custom"
-            ],
-            "description": "生成 commit message 和 AI review 评论时使用的输出语言。"
-          },
-          "aiCommit.customLanguage": {
-            "type": "string",
-            "default": "",
-            "markdownDescription": "仅当 `aiCommit.commitLanguage` 选择 `custom` 时生效。可以填语言名，例如 `Italian`、`Polish`，也可以填团队偏好，例如 `中文，技术名词保留英文`。"
+            "markdownDescription": "生成 commit message 和 AI review 评论时使用的输出语言。可填预设代码：`zh-CN`、`zh-TW`、`en`、`ru`、`ja`、`ko`、`fr`、`de`、`es`、`pt`；也可以直接填自定义语言偏好，例如 `中文，技术名词保留英文`。"
           }
         }
       },
@@ -204,6 +200,7 @@
         "title": "AI Commit: Prompt Instructions",
         "properties": {
           "aiCommit.promptSource": {
+            "order": 10,
             "type": "string",
             "default": "both",
             "enum": [
@@ -218,14 +215,17 @@
               "Markdown file only",
               "Inline prompt and file"
             ],
-            "description": "选择自定义 commit/review 提示词来源。"
+            "markdownDescription": "选择自定义 commit/review 提示词来源，和下面的 `Inline Prompt`、`Prompt File` 一起配置。"
           },
           "aiCommit.inlinePrompt": {
+            "order": 20,
             "type": "string",
             "default": "",
+            "editPresentation": "multilineText",
             "markdownDescription": "直接写在设置里的提示词，会在 diff 前发送给模型。适合简短格式要求、语言要求或示例。"
           },
           "aiCommit.promptFile": {
+            "order": 30,
             "type": "string",
             "default": ".ai-commit.md",
             "markdownDescription": "包含 commit message / review 规则的 Markdown 文件。支持绝对路径，也支持相对工作区根目录的路径。仅在 `promptSource` 为 `file` 或 `both` 时读取。"
@@ -236,31 +236,20 @@
         "title": "AI Commit: Git And Review",
         "properties": {
           "aiCommit.preferStagedChanges": {
+            "order": 10,
             "type": "boolean",
             "default": true,
             "description": "生成 commit message 或 review 时优先使用暂存区 diff；暂存区为空时回退到未暂存改动。"
           },
           "aiCommit.maxDiffCharacters": {
+            "order": 20,
             "type": "number",
             "default": 60000,
             "minimum": 1000,
             "description": "发送给 AI endpoint 的最大 diff 字符数。"
           },
-          "aiCommit.temperature": {
-            "type": "number",
-            "default": 0.2,
-            "minimum": 0,
-            "maximum": 2,
-            "description": "模型采样温度。commit message 通常建议保持较低。"
-          },
-          "aiCommit.maxTokens": {
-            "type": "number",
-            "default": 4096,
-            "minimum": 256,
-            "maximum": 64000,
-            "description": "请求模型输出的最大 token 数。"
-          },
           "aiCommit.maxReviewDiffEditors": {
+            "order": 30,
             "type": "number",
             "default": 5,
             "minimum": 1,
@@ -273,6 +262,7 @@
         "title": "AI Commit: Diagnostics",
         "properties": {
           "aiCommit.logLevel": {
+            "order": 10,
             "type": "string",
             "default": "info",
             "enum": [

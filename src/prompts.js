@@ -29,12 +29,14 @@ function normalizePromptSource(promptSource) {
 }
 
 function resolveOutputLanguage(language, customLanguage) {
-  if (language === 'custom') {
+  const configuredLanguage = String(language || '').trim();
+
+  if (configuredLanguage === 'custom') {
     const custom = String(customLanguage || '').trim();
     return custom || LANGUAGE_LABELS['zh-CN'];
   }
 
-  return LANGUAGE_LABELS[language] || LANGUAGE_LABELS['zh-CN'];
+  return LANGUAGE_LABELS[configuredLanguage] || configuredLanguage || LANGUAGE_LABELS['zh-CN'];
 }
 
 function resolvePromptFilePath(rootPath, promptFile) {
